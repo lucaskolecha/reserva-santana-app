@@ -14,3 +14,23 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+ion-app.md [padding] .scroll-content {
+	padding: 0px;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	&:focus {
+		box-shadow: 0;
+		border: 0px;
+	}
+}
