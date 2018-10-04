@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../interfaces/user.interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -23,12 +25,12 @@ export class LoginPage {
   }
 
   async signIn() {
+    console.log('ashdasdjkhasdhk');
     this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(() => {
-      this.navCtrl.setRoot('HomePage');
+      this.navCtrl.setRoot(HomePage);
     }).catch((err) => {
       console.log(err);
     });
-
   }
 
 }
