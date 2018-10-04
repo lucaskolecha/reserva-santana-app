@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
+import { CompanyProvider } from '../providers/company/company';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthProvider } from '../providers/auth/auth';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
-    AngularFireAuth
+    AngularFireAuth,
+    CompanyProvider
   ]
 })
 export class AppModule { }

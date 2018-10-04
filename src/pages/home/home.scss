@@ -1,3 +1,32 @@
 page-home {
-
+    .home-wrapper {
+        padding: 5px;
+        .title-body {
+            margin-left: 15px;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+        .sub-title-body {
+            margin-top: 0px;
+            margin-left: 15px;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+        .companies {
+            img {
+                min-width: 100%;
+                min-height: 143px;
+            }
+            ion-card-content {
+                padding: 0px 9px 6px;
+            }
+            ion-card-title {
+                font-size: 13px;
+                padding-bottom: 0px;
+            }
+            p {
+                font-size: 11px;
+            }
+        }
+    }
 }

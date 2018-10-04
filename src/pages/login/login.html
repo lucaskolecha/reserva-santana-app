@@ -6,7 +6,7 @@
                 <img src="https://raw.githubusercontent.com/lucaskolecha/reserva-santana/master/src/assets/images/logo.png">
             </div>
             <div class="group-form">
-                <input type="text" class="input-login" placeholder="Digite seu E-mail" [(ngModel)]="user.email" />
+                <input type="email" class="input-login" placeholder="Digite seu E-mail" [(ngModel)]="user.email" />
                 <input type="password" class="input-login" placeholder="Digite sua Senha" [(ngModel)]="user.password" />
                 <div class="flex-column flex-center">
                     <button type="button" class="btn btn-login" (click)="signIn()">Logar</button>

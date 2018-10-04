@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { CompanyProvider } from '../../providers/company/company';
+
 
 @Component({
   selector: 'page-home',
@@ -7,8 +9,12 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  public companies:any;
 
+  constructor(public navCtrl: NavController, private companyProvider: CompanyProvider) {
+    this.companyProvider.getAll().then((response) => {
+      this.companies = response;
+    });
   }
 
 }
