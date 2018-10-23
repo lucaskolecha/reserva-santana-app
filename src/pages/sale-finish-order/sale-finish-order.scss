@@ -1,0 +1,25 @@
+@import "app/variables.scss";
+page-sale-finish-order {
+    .sale-finish-order-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100%;
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            ion-icon {
+                margin-left: 25px;
+                font-size: 30px;
+                &.edit {
+                    color: $success;
+                }
+                &.remove {
+                    color: $error;
+                }
+            }
+        }
+    }
+}

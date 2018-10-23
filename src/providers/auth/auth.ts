@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firestore } from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Constants } from '../../app/constants';
 
 /*
   Generated class for the AuthProvider provider.
@@ -10,8 +12,57 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
+  private db;
+
+  constructor(private afAuth: AngularFireAuth) {
+    this.db = firestore();
+    this.db.settings({ timestampsInSnapshots: true });
   }
+
+  signIn(user) {
+    return new Promise((response, reject) => {
+      this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((document) => {
+        this.getApartment(user.email).then((record) => {
+          response(record)
+        }).catch((err) => {
+          response(null)
+        })
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  }
+
+  getApartment(email) {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_APARTMENTS).where('email', '==', email).get().then((documents) => {
+        if (documents.docs.length > 0) {
+          let data = {
+            uid: documents.docs[0].id,
+            email: documents.docs[0].data().email,
+            number: documents.docs[0].data().number,
+            person: documents.docs[0].data().person,
+          }
+          response(data)
+        } else {
+          response(null);
+        }
+      });
+    })
+  }
+
+  setDeviceApartment(email, deviceId) {
+    this.db.collection(Constants.COLLECTION_APARTMENTS).where('email', '==', email).get().then((documents) => {
+      if (documents.docs.length > 0) {
+
+        if (!documents.docs[0].data().device) {
+          let data = documents.docs[0].data()
+          data['device'] = deviceId
+          this.db.collection(Constants.COLLECTION_APARTMENTS).doc(documents.docs[0].id).set(data);
+        }
+      }
+    });
+  }
+
 
 }

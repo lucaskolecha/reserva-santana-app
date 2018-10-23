@@ -27,7 +27,6 @@ export class CompanyProvider {
             name: doc.data().name,
             phone: doc.data().phone,
             image: doc.data().image,
-            email: doc.data().email,
             uid: doc.id
           }
           all.push(item);
@@ -36,5 +35,4 @@ export class CompanyProvider {
       });
     });
   }
-
 }

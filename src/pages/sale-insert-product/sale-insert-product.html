@@ -1,0 +1,48 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons left>
+            <button class="back-modal" ion-button icon-only (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{product.name}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="sale-insert-product-wrapper">
+        <div class="image">
+            <img [src]="product.image" />
+        </div>
+        <p class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <h5 class="price">
+            {{product.kilogram ? 'Kg: ' : 'Und: '}} {{product.price | currency:'R$ '}}
+        </h5>
+        <div class="qtd-selected" *ngIf="!product.kilogram">
+            <button class="btn-clear btn-plus" (click)="addProduct()"><ion-icon name="add"></ion-icon></button>
+            <button class="btn-clear btn-minus" (click)="removeProduct()"><ion-icon name="remove"></ion-icon></button>
+        </div>
+        <div *ngIf="product.kilogram">
+            <input class="input-kg" type='number' [(ngModel)]="qtd" (keyup)="calculateProduct()">
+        </div>
+        <div [ngClass]="product.kilogram ? 'center' : 'between'">
+            <h5 class="qtd" *ngIf="!product.kilogram">
+                Qtd: {{qtd}}
+            </h5>
+            <h5 *ngIf="!product.kilogram" class="total">
+                Total : {{total | currency: 'R$ '}}
+            </h5>
+            <h5 *ngIf="product.kilogram" class="total">
+                Total : {{total-(total*0.05) | currency: 'R$ '}} à {{total+(total*0.05) | currency: 'R$ '}}
+            </h5>
+        </div>
+        <h6 *ngIf="product.kilogram" class="warn text-center">Atenção o preço dos produtos por Kg pode variar em até 10%</h6>
+
+        <button class="btn-finish" [disabled]="total <= 0" (click)="finish()">Adicionar</button>
+    </div>
+</ion-content>

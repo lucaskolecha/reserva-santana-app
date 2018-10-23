@@ -1,0 +1,83 @@
+page-sale-insert-product {
+    .sale-insert-product-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 15px;
+        .image {
+            margin-top: 15px;
+            max-width: 120px;
+        }
+        h5 {
+            font-size: 15px;
+        }
+        p {
+            &.description {
+                text-align: center;
+            }
+        }
+        .price {
+            text-align: center;
+        }
+        .qtd-selected {
+            margin: 20px 0px;
+            button {
+                height: 54px;
+                width: 54px;
+                border-radius: 50%;
+                font-size: 22px;
+                margin: 0 10px;
+                color: #fff;
+                &.btn-plus {
+                    background-color: $success;
+                }
+                &.btn-minus {
+                    background-color: $danger;
+                }
+            }
+        }
+        .between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            margin-top: 15px;
+            h5 {
+                margin: 0px;
+            }
+        }
+        .center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .btn-finish {
+            position: fixed;
+            bottom: 15px;
+            padding: 0px 54px;
+            height: 54px;
+            font-size: 17px;
+            border-radius: 50px;
+            background-color: $primaryColor;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .input-kg {
+            text-align: center;
+            height: 44px;
+            border-radius: 50px;
+            border: 1px solid #b1b1b1;
+        }
+        .warn {
+            font-size: 12px;
+            padding: 0 20px;
+            color: #ec8700;
+        }
+    }
+}

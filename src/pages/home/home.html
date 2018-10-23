@@ -1,8 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
+        <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
         <ion-title>
             Estabelecimentos
         </ion-title>
@@ -11,12 +9,12 @@
 
 <ion-content padding>
     <div class="home-wrapper">
-        <h2 class="title-body">Olá Lucas Kolecha</h2>
-        <h2 class="sub-title-body">Escolha o estabelecimento para realizar seu pedido.</h2>
+        <h2 class="title-body" *ngIf="user">{{compliment}}, {{user.person}}</h2>
+        <h2 class="sub-title-body">Qual estabelecimento você deseja realizar seu pedido?</h2>
         <ion-grid>
-            <ion-row class="companies">
+            <ion-row class="card-default">
                 <ion-col col-6 *ngFor="let item of companies">
-                    <ion-card>
+                    <ion-card (click)="goSale(item)">
                         <img [src]="item.image" />
                         <ion-card-content>
                             <ion-card-title>

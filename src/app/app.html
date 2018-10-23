@@ -1,13 +1,19 @@
 <ion-menu [content]="mycontent">
     <ion-content>
-        <ion-list>
-            <div class="user">
-
+        <ion-list class="nav flex-between-col">
+            <div class="group-links">
+                <div class="user-nav" *ngIf="user">
+                    <h5>
+                        {{user.person}}
+                    </h5>
+                    <h6>Apartamento: {{user.number}}</h6>
+                </div>
+                <button ion-item (click)="goPerfil()"><ion-icon name="contact" item-start></ion-icon>Perfil</button>
+                <button ion-item (click)="goOrders()"><ion-icon name="list" item-start></ion-icon>Pedidos</button>
             </div>
-            <button ion-item (click)="logout()">
-                <ion-icon name="exit" item-start></ion-icon>
-                Logout
-              </button>
+            <div class="group-buttons">
+                <button class="button-logout" ion-item (click)="logout()"><ion-icon name="exit" item-start></ion-icon>Logout</button>
+            </div>
         </ion-list>
     </ion-content>
 </ion-menu>
