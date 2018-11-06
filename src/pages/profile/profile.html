@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Perfil</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <div>
+        <div class="box">
+            <span>Dados gerais</span>
+            <label>Número do apartamento</label>
+            <input class="input-profile" name="number" [disabled]="true" [(ngModel)]="profile.number" />
+            <label>Nome do responsável</label>
+            <input class="input-profile" name="person" [disabled]="true" [(ngModel)]="profile.person" />
+        </div>
+        <div class="box">
+            <span>Credenciais</span>
+            <label>E-mail</label>
+            <input class="input-profile" name="email" [disabled]="true" [(ngModel)]="profile.email" />
+            <label>Senha</label>
+            <input type="password" class="input-profile" name="password" [(ngModel)]="password" />
+            <label>Repetir senha</label>
+            <input type="password" class="input-profile" name="repassword" [(ngModel)]="rePassword" />
+        </div>
+        <div class="flex-center">
+            <button [disabled]="!password || !rePassword" (click)="updateRecord()" class="btn btn-att">Atualizar Dados</button>
+        </div>
+    </div>
+</ion-content>

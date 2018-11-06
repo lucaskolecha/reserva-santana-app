@@ -12,25 +12,24 @@
     </ion-navbar>
 
 </ion-header>
-
-<!-- *ngFor="let order of sale.orders; let i = index" -->
 <ion-content padding>
     <div class="orders-wrapper">
         <div *ngIf="orders">
-            <ion-card *ngFor="let order of orders; let i = index">
+            <ion-card *ngFor="let order of orders; let i = index" (click)="openVisualizeSale(order)">
                 <ion-card-header class="flex-between-row flex-center">
-                    <h5>{{order.companyName}}</h5>
+                    <h5>{{order.companyInfo.name}}</h5>
                     <label class="status" [ngClass]="{
                         'pending': order.status === 'PENDING',
                         'visualized': order.status === 'VISUALIZED',
                         'sent': order.status === 'SENT',
-                        'finish': order.status === 'FINISH'
-                    }">
+                        'finish': order.status === 'FINISH'}">
                         {{displayStatus(order.status)}}
                     </label>
                 </ion-card-header>
                 <ion-card-content>
-
+                    <h6 class="dateTime" *ngIf="order.date">
+                        <ion-icon name="time"></ion-icon> {{lastDateUpdate(order)}}
+                    </h6>
                 </ion-card-content>
             </ion-card>
         </div>

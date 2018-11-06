@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { CompanyProvider } from '../../providers/company/company';
 import { SalePage } from '../sale/sale';
-import { Storage } from '@ionic/storage';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   selector: 'page-home',
@@ -14,27 +14,21 @@ export class HomePage {
   public companies: any
   public compliment: any
   public user
-  
+
   constructor(public navCtrl: NavController,
     private companyProvider: CompanyProvider,
-    public loadingCtrl: LoadingController,
-    private storage: Storage) {
+    private loadingCtrl: LoadingController,
+    private authProvider: AuthProvider) {
     let loader = this.loadingCtrl.create({
       content: "Carregando empresas..."
     })
     loader.present()
     this.companyProvider.getAll().then((response) => {
+      this.user = this.authProvider.user
       this.companies = response
       loader.dismiss()
     })
-
     this.displayCompliment()
-  }
-
-  ionViewDidLoad() {
-    this.storage.get('apartment').then((response) => {
-      this.user = response
-    })
   }
 
   goSale(company) {

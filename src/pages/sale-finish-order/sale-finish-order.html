@@ -12,7 +12,7 @@
               <ion-icon name="arrow-back"></ion-icon>
           </button>
         </ion-buttons>
-        <ion-title>Meu carrinho</ion-title>
+        <ion-title>{{visualize ? 'Meu pedido' : 'Meu carrinho'}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -32,7 +32,7 @@
                             <p>Qtd: {{order.qtd}} x {{order.product.price | currency: 'R$ '}}</p>
                             <p>Total: {{order.total | currency: 'R$ '}}</p>
                         </div>
-                        <div class="actions">
+                        <div class="actions" [hidden]="visualize">
                             <ion-icon class="edit" (click)="editProduct(i)" name="create"></ion-icon>
                             <ion-icon class="remove" (click)="removeProduct(i)" name="trash"></ion-icon>
                         </div>
@@ -44,10 +44,35 @@
             <ion-card-header class="text-center">
                 Total: {{ calculateTotal() | currency:'R$ ' }}
             </ion-card-header>
-            <ion-card-content>
+            <ion-card-content [hidden]="visualize">
                 <button class="btn-default" (click)="finishOrder()">
                     Finalizar
                 </button>
+            </ion-card-content>
+            <ion-card-content [hidden]="!visualize">
+                <div *ngIf="sale.status">
+                    <h6 class="calender">
+                        <ion-icon name="calendar"></ion-icon> {{transformDate(sale.date) | date:'dd/MM/yyyy'}}
+                    </h6>
+                    <h6 class="status-line" *ngIf="sale.date > 0 && sale.status != 'CANCELED'">
+                        <span class="status status-dif pending"><ion-icon name="time"></ion-icon> Pendente</span> {{transformDate(sale.date) | date:'HH:mm:ss'}}
+                    </h6>
+                    <h6 class="status-line" *ngIf="sale.dateVisualized > 0 && sale.status != 'CANCELED'">
+                        <span class="status status-dif visualized"><ion-icon name="time"></ion-icon> Visualizado</span> {{transformDate(sale.dateVisualized) | date:'HH:mm:ss'}}
+                    </h6>
+                    <h6 class="status-line" *ngIf="sale.dateSent > 0 && sale.status != 'CANCELED'">
+                        <span class="status status-dif sent"><ion-icon name="time"></ion-icon> Enviado</span> {{transformDate(sale.dateSent) | date:'HH:mm:ss'}}
+                    </h6>
+                    <h6 class="status-line" *ngIf="sale.dateFinish > 0 && sale.status != 'CANCELED'">
+                        <span class="status status-dif finish"><ion-icon name="time"></ion-icon> Finalizado</span> {{transformDate(sale.dateFinish) | date:'HH:mm:ss'}}
+                    </h6>
+                    <h6 class="status-line" *ngIf="sale.status === 'CANCELED'">
+                        <span class="status status-dif finish"><ion-icon name="time"></ion-icon> Cancelado</span>
+                    </h6>
+                    <p *ngIf="sale.status === 'CANCELED'">
+                        {{sale.reasonCancellation}}
+                    </p>
+                </div>
             </ion-card-content>
         </ion-card>
     </div>

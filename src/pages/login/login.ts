@@ -49,7 +49,6 @@ export class LoginPage {
       content: "Buscando dados..."
     })
     loader.present()
-
     this.ap.signIn(this.user).then((teste) => {
       loader.dismiss()
       this.notification.startNotification(this.user.email)

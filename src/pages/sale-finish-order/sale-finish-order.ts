@@ -19,9 +19,16 @@ import { LoadingController } from 'ionic-angular';
 export class SaleFinishOrderPage {
   public sale: any
   public company: any
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, private orderProvider: OrderProvider, private modalController: ModalController, private navParams: NavParams, private viewCtrl: ViewController) {
+  public visualize: boolean
+  constructor(public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
+    private orderProvider: OrderProvider,
+    private modalController: ModalController,
+    private navParams: NavParams,
+    private viewCtrl: ViewController) {
     this.sale = this.navParams.get('sale')
     this.company = this.navParams.get('company')
+    this.visualize = this.navParams.get('visualize')
     this.calculateTotal()
   }
 
@@ -52,15 +59,19 @@ export class SaleFinishOrderPage {
 
   finishOrder() {
     this.sale.totalOrder = this.calculateTotal()
+    this.sale.date = new Date().getTime()
     let loader = this.loadingCtrl.create({
       content: `Enviando seu pedido para ${this.company.name}`
     })
     loader.present()
-    this.orderProvider.saveOrder(this.sale, this.company).then(() => {
+    this.orderProvider.saveOrder(this.sale).then(() => {
       loader.dismiss(false)
       this.dismiss(false)
-    });
-    
+    })
+  }
+
+  transformDate(date) {
+    return new Date(date)
   }
 
 }

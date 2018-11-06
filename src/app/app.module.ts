@@ -18,6 +18,7 @@ import { SalePage } from '../pages/sale/sale';
 import { SaleInsertProductPage } from '../pages/sale-insert-product/sale-insert-product';
 import { SaleFinishOrderPage } from '../pages/sale-finish-order/sale-finish-order';
 import { OrdersPage } from '../pages/orders/orders';
+import { ProfilePage } from '../pages/profile/profile';
 import { AuthProvider } from '../providers/auth/auth';
 import { CompanyProvider } from '../providers/company/company';
 import { ProductProvider } from '../providers/product/product';
@@ -35,13 +36,14 @@ import { OrderProvider } from '../providers/order/order';
     SaleInsertProductPage,
     SaleFinishOrderPage,
     OrdersPage,
+    ProfilePage,
   ],
   imports: [
     BrowserModule,
     NgxMaskModule.forRoot(),
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
-      backButtonText: 'Voltar'
+      backButtonText: ''
     }),
     AngularFireModule.initializeApp(firebase_config)
   ],
@@ -54,6 +56,7 @@ import { OrderProvider } from '../providers/order/order';
     SaleInsertProductPage,
     SaleFinishOrderPage,
     OrdersPage,
+    ProfilePage,
   ],
   providers: [
     StatusBar,

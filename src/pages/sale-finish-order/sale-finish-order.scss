@@ -21,5 +21,30 @@ page-sale-finish-order {
                 }
             }
         }
+        .status-dif {
+            margin-right: 5px;
+            display: inline-flex;
+            width: 115px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            ion-icon {
+                position: absolute;
+                left: 5px;
+            }
+        }
+    }
+    .status-line {
+        margin-bottom: 5px;
+    }
+    h6.calender {
+        margin-top: -10px !important;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        ion-icon {
+            color: $primaryColor;
+            margin-right: 15px;
+        }
     }
 }

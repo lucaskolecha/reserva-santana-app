@@ -12,11 +12,9 @@ export class NotificationProvider {
     this.oneSignal.setSubscription(true);
     this.oneSignal.registerForPushNotifications();
     this.oneSignal.getIds().then((ids) => {
-      console.log(email)
       this.authProvider.setDeviceApartment(email, ids)
-      console.log(ids.userId) // salva id no firebase no usuario logado
     }, (err) => {
-      console.log(err);
+      console.error(err);
     });
     this.oneSignal.endInit();
   }

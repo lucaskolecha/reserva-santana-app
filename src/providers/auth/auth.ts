@@ -13,6 +13,7 @@ import { Constants } from '../../app/constants';
 export class AuthProvider {
 
   private db;
+  public user
 
   constructor(private afAuth: AngularFireAuth) {
     this.db = firestore();
@@ -23,6 +24,7 @@ export class AuthProvider {
     return new Promise((response, reject) => {
       this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password).then((document) => {
         this.getApartment(user.email).then((record) => {
+          this.user = record
           response(record)
         }).catch((err) => {
           response(null)
@@ -45,9 +47,43 @@ export class AuthProvider {
           }
           response(data)
         } else {
-          response(null);
+          response(null)
         }
-      });
+      })
+    })
+  }
+
+  setPassword(password) {
+    return new Promise((response, reject) => {
+      var user = this.afAuth.auth.currentUser
+      user.updatePassword(password).then(() => {
+        response(true)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  }
+
+  getApartmentById(id) {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_APARTMENTS).doc(id).get().then((documents) => {
+        if (documents.exists) {
+          response(documents.data())
+        } else {
+          response(null)
+        }
+      })
+    })
+  }
+
+  setProfile(id, data) {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_APARTMENTS)
+        .doc(id)
+        .set(data)
+        .then((resp) => {
+          response(resp)
+        })
     })
   }
 

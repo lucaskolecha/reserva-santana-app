@@ -10,77 +10,86 @@ import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { OrdersPage } from '../pages/orders/orders';
 import { AuthProvider } from '../providers/auth/auth';
+import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any;
+rootPage: any;
   public user
 
-  constructor(public storage: Storage,
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    private auth: AngularFireAuth,
-    private menuController: MenuController,
-    public broadcaster: Broadcaster,
-    private authProvider: AuthProvider) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-    this.autenticateUser()
-    this.broadcaster.addEventListener('onLogin').subscribe((event) => {
-      this.getStorageAp()
-    });
-  }
+constructor(public storage: Storage,
+  platform: Platform,
+  statusBar: StatusBar,
+  splashScreen: SplashScreen,
+  private auth: AngularFireAuth,
+  private menuController: MenuController,
+  public broadcaster: Broadcaster,
+  private authProvider: AuthProvider) {
+  platform.ready().then(() => {
+    statusBar.overlaysWebView(false);
+    statusBar.backgroundColorByHexString('#ffffff');
+    statusBar.styleDefault();
+    splashScreen.hide();
+  });
+  this.autenticateUser()
+  this.broadcaster.addEventListener('onLogin').subscribe((event) => {
+    this.getStorageAp()
+  });
+}
 
-  toggleMenu() {
-    this.menuController.toggle();
-  }
+toggleMenu() {
+  this.menuController.toggle();
+}
 
-  autenticateUser() {
-    this.auth.authState
-      .subscribe(
-        user => {
-          if (user) {
-            this.authProvider.getApartment(user.email).then((data) => {
+autenticateUser() {
+  this.auth.authState
+    .subscribe(
+      user => {
+        if (user) {
+          this.authProvider.getApartment(user.email).then((data) => {
+            this.storage.set('apartment', data).then(() => {
               this.rootPage = HomePage;
               this.menuController.swipeEnable(true);
               this.user = data;
+              this.authProvider.user = data
             })
-          } else {
-            this.rootPage = LoginPage;
-          }
-        },
-        () => {
+          })
+        } else {
           this.rootPage = LoginPage;
         }
-      );
-  }
+      },
+      () => {
+        this.rootPage = LoginPage;
+      }
+    );
+}
 
-  getStorageAp() {
-    this.storage.get('apartment').then((response) => {
-      this.user = response
-    })
-  }
+getStorageAp() {
+  this.storage.get('apartment').then((response) => {
+    this.user = response
+  })
+}
 
-  goOrders() {
-    this.nav.push(OrdersPage)
-    this.menuController.close()
-  }
+goOrders() {
+  this.nav.push(OrdersPage)
+  this.menuController.close()
+}
 
-  logout() {
-    this.auth.auth.signOut().then(() => {
-      this.storage.clear()
-      this.user = {}
-      this.menuController.close();
-      this.rootPage = LoginPage;
-    })
-  }
+goProfile() {
+  this.nav.push(ProfilePage)
+  this.menuController.close()
+}
+
+logout() {
+  this.auth.auth.signOut().then(() => {
+    this.storage.clear()
+    this.user = {}
+    this.menuController.close();
+    this.rootPage = LoginPage;
+  })
+}
 }
 

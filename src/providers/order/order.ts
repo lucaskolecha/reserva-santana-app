@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { firestore } from 'firebase'
 import { Constants } from '../../app/constants';
+import { StatusOrder } from '../../interfaces/status-order.interface';
 
 /*
   Generated class for the OrderProvider provider.
@@ -18,50 +19,36 @@ export class OrderProvider {
     this.db.settings({ timestampsInSnapshots: true })
   }
 
-  saveOrder(order, company) {
+  saveOrder(order) {
     return new Promise((response, reject) => {
-      this.db.collection(Constants.COLLECTION_COMPANIES).doc(company.uid)
-        .collection(Constants.COLLECTION_ORDERS).doc().set(order).then((data) => {
-          response(data);
-        }).catch((error) => {
-          reject(error)
+      this.db.collection(Constants.COLLECTION_ORDERS)
+        .add(order)
+        .then((data) => {
+          response(data)
+        }).catch((err) => {
+          reject(err)
         })
     })
   }
 
-  searchOrdersByAp(apartment) {
-    let allOrders = []
-    return new Promise((response, reject) => {
-      this.db.collection(Constants.COLLECTION_COMPANIES)
-        .get()
-        .then((companies) => {
-          companies.docs.forEach((company, index) => {
-            this.db.collection(Constants.COLLECTION_COMPANIES).doc(company.id)
-              .collection(Constants.COLLECTION_ORDERS)
-              .where('apartment.uid', '==', apartment.uid)
-              .onSnapshot((orders) => {
-                orders.forEach(element => {
-                  let data = {}
-                  data = element.data()
-                  data['companyName'] = company.data().name
-                  allOrders.push(data)
-
-                  response(allOrders)
-
-                })
-              })
-          })
-        })
-    })
+  searchOrdersByAp(apartmentId, response) {
+    return this.db.collection(Constants.COLLECTION_ORDERS)
+      .where('apartmentId', '==', apartmentId)
+      .orderBy("date", "desc")
+      .onSnapshot((snapshot) => {
+        response(snapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data())))
+      })
   }
 
   translateStatus(status) {
-    if (status === 'PENDING') {
+    if (status === StatusOrder.PENDING) {
       return 'Pendente'
-    } else if (status === 'VISUALIZED') {
+    } else if (status === StatusOrder.VISUALIZED) {
       return 'Visulizado'
-    } else if (status === 'SENT') {
+    } else if (status === StatusOrder.SENT) {
       return 'Enviado'
+    } else if (status === StatusOrder.CANCELED) {
+      return 'Cancelado'
     } else {
       return 'Finalizado'
     }

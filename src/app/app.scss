@@ -12,13 +12,13 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@import "app/variables.scss";
 html,
 body,
 * {
     font-family: 'Montserrat', sans-serif;
 }
 
-@import "app/variables.scss";
 ion-app.md [padding] .scroll-content {
     padding: 0px;
 }
@@ -161,6 +161,7 @@ ion-fab {
     font-weight: 600;
     padding: 2px 10px;
     margin-top: -5px;
+    margin-bottom: 5px;
     &.pending {
         background-color: $primaryColor;
     }

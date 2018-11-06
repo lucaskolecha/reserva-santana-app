@@ -1,0 +1,38 @@
+@import "app/variables.scss";
+page-profile {
+    .box {
+        position: relative;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px 10px 10px 10px;
+        margin: 20px 10px;
+        span {
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 50px;
+            padding: 5px 10px;
+            position: absolute;
+            font-size: 11px;
+            top: -12px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 34px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+    }
+    .btn-att {
+        background-color: #4BB543;
+        color: #fff;
+        font-size: 16px;
+        width: 100%;
+        border-radius: 5px;
+        margin: 0px 10px;
+        height: 44px;
+    }
+}

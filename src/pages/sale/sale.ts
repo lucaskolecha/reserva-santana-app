@@ -5,6 +5,7 @@ import { LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { SaleInsertProductPage } from '../sale-insert-product/sale-insert-product';
 import { SaleFinishOrderPage } from '../sale-finish-order/sale-finish-order';
+import { StatusOrder } from '../../interfaces/status-order.interface';
 import { Storage } from '@ionic/storage';
 import swal from 'sweetalert';
 
@@ -39,10 +40,15 @@ export class SalePage {
 
     this.storage.get('apartment').then((ap) => {
       this.sale = {
-        apartment: ap,
+        apartmentId: ap.uid,
+        companyId: this.company.uid,
         orders: [],
-        status: 'PENDING',
-        date: new Date().getTime(),
+        status: StatusOrder.PENDING,
+        reasonCancellation: '',
+        date: 0,
+        dateVisualized: 0,
+        dateSent: 0,
+        dateFinish: 0
       }
     })
   }
@@ -58,7 +64,7 @@ export class SalePage {
   }
 
   openFinishSale() {
-    const modalFinish = this.modalController.create(SaleFinishOrderPage, { sale: Object.assign({}, this.sale), company: this.company })
+    const modalFinish = this.modalController.create(SaleFinishOrderPage, { sale: Object.assign({}, this.sale), company: this.company, visualize: false })
     modalFinish.onDidDismiss((stay) => {
       if (!stay) {
         swal("Uhullll!", "Pedido realizado com sucesso, agora é só aguardar a resposta do estabelecimento.", "success");
