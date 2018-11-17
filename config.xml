@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>reserva-santana-app</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="br.com.lskolecha" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Santana App</name>
+    <description>Faça pedidos com poucos cliques.</description>
+    <author email="lskolecha@gmail.com" href="http://lskolecha.com.br">Lucas Kolecha</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -88,8 +88,11 @@
     <plugin name="cordova-sqlite-storage" spec="^2.5.0" />
     <plugin name="cordova-plugin-broadcaster" spec="^3.1.1" />
     <allow-navigation href="http://192.168.100.154:8100" />
-    <engine name="android" spec="~7.1.1" />
-    <engine name="browser" spec="~5.0.4" />
     <allow-navigation href="http://192.168.0.17:8100" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="~5.0.4" />
+    <allow-navigation href="http://192.168.100.7:8100" />
+    <allow-navigation href="http://192.168.0.12:8100" />
+    <allow-navigation href="http://192.168.0.18:8100" />
 </widget>

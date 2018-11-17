@@ -7,10 +7,10 @@
             </div>
             <div class="group-form">
                 <input type="email" class="input-login" placeholder="Digite seu E-mail" [(ngModel)]="user.email" />
-                <input type="password" class="input-login" placeholder="Digite sua Senha" [(ngModel)]="user.password" />
+                <input type="password" [ngClass]="{'close' : close}" class="input-login password" placeholder="Digite sua Senha" [(ngModel)]="user.password" />
                 <div class="flex-column flex-center">
-                    <button type="button" class="btn btn-login" (click)="signIn()">Logar</button>
-                    <a class="rememberPass" target="_self">Esqueci minha senha</a>
+                    <button type="button" class="btn btn-login" (click)="close ? resetPassword() : signIn()">{{close ? 'Enviar e-mail' : 'Logar'}}</button>
+                    <a (click)="forgotPassword()" class="rememberPass" target="_self">{{close ? 'voltar' : 'Esqueci minha senha'}}</a>
                 </div>
             </div>
         </div>

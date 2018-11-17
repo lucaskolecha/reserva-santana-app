@@ -4,15 +4,18 @@ page-sale-insert-product {
         flex-direction: column;
         align-items: center;
         padding: 0 15px;
+        height: 100%;
         .image {
             margin-top: 15px;
             max-width: 120px;
+            border-radius: 3px;
         }
         h5 {
             font-size: 15px;
         }
         p {
             &.description {
+                min-height: 54px;
                 text-align: center;
             }
         }
@@ -57,8 +60,7 @@ page-sale-insert-product {
             text-align: center;
         }
         .btn-finish {
-            position: fixed;
-            bottom: 15px;
+            margin-top: 25px;
             padding: 0px 54px;
             height: 54px;
             font-size: 17px;

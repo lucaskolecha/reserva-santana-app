@@ -40,6 +40,17 @@ export class OrderProvider {
       })
   }
 
+  lastRecord() {
+    return new Promise((response) => {
+      this.db.collection(Constants.COLLECTION_ORDERS)
+        .orderBy("date", "desc")
+        .limit(1)
+        .onSnapshot((snapshot) => {
+          response(snapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data())))
+        })
+    })
+  }
+
   translateStatus(status) {
     if (status === StatusOrder.PENDING) {
       return 'Pendente'

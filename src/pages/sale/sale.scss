@@ -1,6 +1,8 @@
 page-sale {
     .sale-wrapper {
         padding: 5px;
+        max-height: calc(100vh - 56px);
+        overflow: scroll;
         .category {
             margin-top: 10px;
             margin-bottom: 0px;

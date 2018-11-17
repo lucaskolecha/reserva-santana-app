@@ -14,17 +14,20 @@
         <ion-grid>
             <ion-row class="card-default">
                 <ion-col col-6 *ngFor="let item of companies">
-                    <ion-card (click)="goSale(item)">
+                    <ion-card [ngClass]="disableCompany(item) ? 'disabled' : ''" (click)="!disableCompany(item) ? goSale(item) : ''">
                         <img [src]="item.image" />
                         <ion-card-content>
                             <ion-card-title>
                                 {{item.name}}
                             </ion-card-title>
                             <p>
-                                {{item.phone}}
+                                {{formatPhone(item.phone)}}
                             </p>
                         </ion-card-content>
                     </ion-card>
+                    <div *ngIf="disableCompany(item)" class="not-work">
+                        <label>Não está atendendo neste horário</label>
+                    </div>
                 </ion-col>
             </ion-row>
         </ion-grid>

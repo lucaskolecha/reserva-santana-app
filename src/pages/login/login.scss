@@ -22,6 +22,7 @@ page-login {
                 max-width: 135px;
             }
             .group-form {
+                overflow: hidden;
                 .input-login {
                     transition: box-shadow 300ms, border-color 300ms;
                     width: 100%;
@@ -30,11 +31,17 @@ page-login {
                     height: 44px;
                     text-align: center;
                     margin-bottom: 20px;
+                    transition: transform 200ms ease;
                     &:focus {
                         border-color: $primaryColor;
                         -webkit-box-shadow: 0px 0px 16px 0px $primaryColor;
                         -moz-box-shadow: 0px 0px 16px 0px $primaryColor;
                         box-shadow: 0px 0px 16px 0px $primaryColor;
+                    }
+                    &.password {
+                        &.close {
+                            transform: translateX(-100%)
+                        }
                     }
                 }
                 .btn-login {

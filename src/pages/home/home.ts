@@ -35,6 +35,37 @@ export class HomePage {
     this.navCtrl.push(SalePage, { company })
   }
 
+  formatPhone(phone) {
+    var numbers = phone.replace(/\D/g, ''),
+      char = { 0: '(', 2: ') ', 3: ' ', 7: '-' };
+    phone = '';
+    for (var i = 0; i < numbers.length; i++) {
+      phone += (char[i] || '') + numbers[i];
+    }
+    return phone
+  }
+
+  disableCompany(item) {
+    const hour = new Date().getHours()
+    const minute = new Date().getMinutes()
+    const arrayTimeOpen = [] 
+    const arrayTimeClose = []
+    arrayTimeOpen.push(item.open.slice(0, -2))
+    arrayTimeOpen.push(item.open.slice(2))
+    arrayTimeClose.push(item.close.slice(0, -2))
+    arrayTimeClose.push(item.close.slice(2))
+    if (Number(hour) > Number(arrayTimeOpen[0]) && Number(hour) < Number(arrayTimeClose[0])) {
+      return false
+    }
+    if (Number(hour) === Number(arrayTimeClose[0]) && Number(minute) < Number(arrayTimeClose[1])) {
+      return false
+    }
+    if (Number(hour) === Number(arrayTimeOpen[0]) && Number(minute) > Number(arrayTimeOpen[1])) {
+      return false
+    }
+    return true
+   }
+
   displayCompliment() {
     const hour = new Date().getHours();
     if (hour < 5) {

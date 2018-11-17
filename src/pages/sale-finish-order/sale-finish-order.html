@@ -42,18 +42,23 @@
         </ion-list>
         <ion-card>
             <ion-card-header class="text-center">
-                Total: {{ calculateTotal() | currency:'R$ ' }}
+                <div class="infos">
+                    <h5>Total: {{ calculateTotal() | currency:'R$ ' }}</h5>
+                    <a *ngIf="!visualize" target="_self" (click)="openObs = !openObs">{{openObs ? 'Ocultar' : 'Adicionar' }} Observação</a>
+                    <h6 *ngIf="visualize" class="calender">
+                        <ion-icon name="calendar"></ion-icon> {{transformDate(sale.date) | date:'dd/MM/yyyy'}}
+                    </h6>
+                </div>
+                <textarea class="form-control obs" [hidden]="visualize" [ngClass]="openObs ? 'open' : ''" [(ngModel)]="sale.description" placeholder="Observação do pedido"></textarea>
+                <p *ngIf="sale.description" class="p-desc" [hidden]="!visualize">Obs: {{sale.description}}</p>
             </ion-card-header>
             <ion-card-content [hidden]="visualize">
-                <button class="btn-default" (click)="finishOrder()">
+                <button class="btn-default" [disabled]="sale.orders.length <= 0" (click)="finishOrder()">
                     Finalizar
                 </button>
             </ion-card-content>
             <ion-card-content [hidden]="!visualize">
                 <div *ngIf="sale.status">
-                    <h6 class="calender">
-                        <ion-icon name="calendar"></ion-icon> {{transformDate(sale.date) | date:'dd/MM/yyyy'}}
-                    </h6>
                     <h6 class="status-line" *ngIf="sale.date > 0 && sale.status != 'CANCELED'">
                         <span class="status status-dif pending"><ion-icon name="time"></ion-icon> Pendente</span> {{transformDate(sale.date) | date:'HH:mm:ss'}}
                     </h6>
@@ -67,10 +72,10 @@
                         <span class="status status-dif finish"><ion-icon name="time"></ion-icon> Finalizado</span> {{transformDate(sale.dateFinish) | date:'HH:mm:ss'}}
                     </h6>
                     <h6 class="status-line" *ngIf="sale.status === 'CANCELED'">
-                        <span class="status status-dif finish"><ion-icon name="time"></ion-icon> Cancelado</span>
+                        <span class="status status-dif canceled"><ion-icon name="time"></ion-icon> Cancelado</span>
                     </h6>
                     <p *ngIf="sale.status === 'CANCELED'">
-                        {{sale.reasonCancellation}}
+                        Motivo: {{sale.reasonCancellation}}
                     </p>
                 </div>
             </ion-card-content>

@@ -18,7 +18,7 @@
             <img [src]="product.image" />
         </div>
         <p class="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {{product.description}}
         </p>
         <h5 class="price">
             {{product.kilogram ? 'Kg: ' : 'Und: '}} {{product.price | currency:'R$ '}}

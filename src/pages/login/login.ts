@@ -23,7 +23,7 @@ import { Storage } from '@ionic/storage';
 export class LoginPage {
 
   public user: User = { email: '', password: '' };
-
+  private close: boolean
   constructor(private notification: NotificationProvider,
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
@@ -55,13 +55,30 @@ export class LoginPage {
       this.storage.set('apartment', teste).then(() => {
         this.broadcaster.fireNativeEvent('onLogin', {});
       })
+      
     }).catch((err) => {
       loader.dismiss()
       if (err) {
         this.invalidCredential()
       }
-    });
+    })
+  }
 
+  forgotPassword() {
+    this.close = !this.close
+  }
+
+  resetPassword() {
+    this.ap.forgotPassword(this.user.email).then(() => {
+      this.close = false
+      let toast = this.toastCtrl.create({
+        message: 'Foi enviado um email para você recuperar sua senha.',
+        duration: 5000,
+        position: 'bottom'
+      })
+      toast.onDidDismiss(() => true)
+      toast.present()
+    })
   }
 
 }

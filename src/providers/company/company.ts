@@ -27,6 +27,8 @@ export class CompanyProvider {
             name: doc.data().name,
             phone: doc.data().phone,
             image: doc.data().image,
+            open: doc.data().open,
+            close: doc.data().close,
             uid: doc.id
           }
           all.push(item);

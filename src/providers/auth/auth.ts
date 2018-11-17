@@ -100,5 +100,13 @@ export class AuthProvider {
     });
   }
 
+  forgotPassword(email) {
+    return new Promise((response:any) => {
+      this.afAuth.auth.sendPasswordResetEmail(email).then((resp) => {
+        console.log(resp)
+        response(resp)
+      })
+    })
+  }
 
 }

@@ -45,6 +45,7 @@ export class SalePage {
         orders: [],
         status: StatusOrder.PENDING,
         reasonCancellation: '',
+        description:'',
         date: 0,
         dateVisualized: 0,
         dateSent: 0,

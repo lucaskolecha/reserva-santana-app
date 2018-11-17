@@ -17,12 +17,13 @@
         <div *ngIf="orders">
             <ion-card *ngFor="let order of orders; let i = index" (click)="openVisualizeSale(order)">
                 <ion-card-header class="flex-between-row flex-center">
-                    <h5>{{order.companyInfo.name}}</h5>
+                    <h5>{{order.companyInfo.name}} - #{{order.cod}}</h5>
                     <label class="status" [ngClass]="{
                         'pending': order.status === 'PENDING',
                         'visualized': order.status === 'VISUALIZED',
                         'sent': order.status === 'SENT',
-                        'finish': order.status === 'FINISH'}">
+                        'finish': order.status === 'FINISH',
+                        'canceled': order.status === 'CANCELED'}">
                         {{displayStatus(order.status)}}
                     </label>
                 </ion-card-header>
