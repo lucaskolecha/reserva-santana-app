@@ -28,7 +28,10 @@
             <button class="btn-clear btn-minus" (click)="removeProduct()"><ion-icon name="remove"></ion-icon></button>
         </div>
         <div *ngIf="product.kilogram">
-            <input class="input-kg" type='number' [(ngModel)]="qtd" (keyup)="calculateProduct()">
+            <div class="group">
+                <input class="input-kg" #qtdMask [(ngModel)]="qtd" (keyup)="calculateProduct()">
+                <span class="ab">gramas</span>
+            </div>
         </div>
         <div [ngClass]="product.kilogram ? 'center' : 'between'">
             <h5 class="qtd" *ngIf="!product.kilogram">

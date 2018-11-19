@@ -4,7 +4,6 @@ import { SaleInsertProductPage } from '../sale-insert-product/sale-insert-produc
 import { ModalController } from 'ionic-angular'
 import { OrderProvider } from '../../providers/order/order'
 import { LoadingController } from 'ionic-angular'
-import { AlertController } from 'ionic-angular'
 /**
 * Generated class for the SaleFinishOrderPage page.
 *
@@ -26,8 +25,7 @@ export class SaleFinishOrderPage {
     private orderProvider: OrderProvider,
     private modalController: ModalController,
     private navParams: NavParams,
-    private viewCtrl: ViewController,
-    private alertController: AlertController) {
+    private viewCtrl: ViewController) {
     this.sale = this.navParams.get('sale')
     this.company = this.navParams.get('company')
     this.visualize = this.navParams.get('visualize')

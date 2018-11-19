@@ -29,7 +29,7 @@
                         </ion-avatar>
                         <div class="flex-column">
                             <h2>{{order.product.name}}</h2>
-                            <p>Qtd: {{order.qtd}} x {{order.product.price | currency: 'R$ '}}</p>
+                            <p>Qtd: {{order.qtd}}{{order.product.kilogram ? 'g' : ''}} x {{order.product.price | currency: 'R$ '}}</p>
                             <p>Total: {{order.total | currency: 'R$ '}}</p>
                         </div>
                         <div class="actions" [hidden]="visualize">

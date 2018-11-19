@@ -71,7 +71,9 @@ page-sale-insert-product {
             font-weight: bold;
         }
         .input-kg {
-            text-align: center;
+            text-align: left;
+            padding-right: 15px;
+            padding-left: 15px;
             height: 44px;
             border-radius: 50px;
             border: 1px solid #b1b1b1;
@@ -80,6 +82,18 @@ page-sale-insert-product {
             font-size: 12px;
             padding: 0 20px;
             color: #ec8700;
+        }
+        .group {
+            position: relative;
+        }
+        .ab {
+            position: absolute;
+            display: flex;
+            right: 12px;
+            top: 0;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
     }
 }

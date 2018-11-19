@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import $ from 'jquery'
+import 'jquery-mask-plugin'
 
 /**
  * Generated class for the SaleInsertProductPage page.
@@ -18,6 +20,7 @@ export class SaleInsertProductPage {
   public product;
   public total: number = 0.00
   public qtd: number
+  @ViewChild('qtdMask') qtdMask: ElementRef
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.product = this.navParams.get('product')
@@ -25,6 +28,14 @@ export class SaleInsertProductPage {
     if (this.qtd > 0) {
       this.total = this.qtd * this.product.price
     }
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      if (this.qtdMask) {
+        $(this.qtdMask.nativeElement).mask('#0.000', { reverse: true })
+      }
+    })
   }
 
   dismiss() {
@@ -44,7 +55,7 @@ export class SaleInsertProductPage {
   }
 
   calculateProduct() {
-    this.total = this.product.price * this.qtd
+    this.total = this.product.price * (this.qtd / 1000)
   }
 
   finish() {
