@@ -56,6 +56,7 @@ export class SaleInsertProductPage {
 
   calculateProduct() {
     this.total = this.product.price * (this.qtd / 1000)
+    this.total = parseFloat(this.total.toFixed(2))
   }
 
   finish() {
